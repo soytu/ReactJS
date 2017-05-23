@@ -3,167 +3,169 @@
 <head>
   <meta charset="utf-8">
   <title>HW_lesson1_1</title>
-    
-  <style>
-  
-  </style>
-    
 </head>
 
 <body>
 
    
-  <script type="text/javascript">
-  'use strict'
-  //1.	
-	//Написать функцию loop, которая будет принимать параметры: times (значение по умолчанию = 0), 
-  //callback (значение по умолчанию = null) и будет в цикле (times раз), вызывать функцию callback. 
-  //Если функцию не передана, то цикл не должен отрабатывать ни разу. Покажите применение этой функции
-    
-  function loop(times=0, callback=null){
-  	if (typeof(callback) === "function") {
-    	for (let i=0; i<times; i++) {
-      	callback()
-      	}
-    	};
-    return x;
-  };
-  let x=0;
-  console.log(loop(20, 50));
-  console.log(loop(5, function add (){return ++x}));
+ 	<script type="text/javascript">
+ 		'use strict'
+ 		//1.	
+		//Написать функцию loop, которая будет принимать параметры: times (значение по умолчанию = 0), 
+ 		//callback (значение по умолчанию = null) и будет в цикле (times раз), вызывать функцию callback. 
+ 		//Если функция не передана, то цикл не должен отрабатывать ни разу. Покажите применение этой функции
+	 	function loop(times=0, callback=null){
+  		if (typeof(callback) === "function") {
+    		for (let i=0; i<times; i++) {
+    	  	callback()
+    	  	}
+    		};
+    	return x;
+  	};
+  	let x=0;
+  	console.log(loop(20, 50));
+  	console.log(loop(5, function add (){return ++x}));
 
-	//2.	
-	//Написать функцию calculateArea, которая будет принимать параметры, для вычисления площади 
-	//(можете выбрать какую то конкретную фигуру, а можете, основываясь на переданных параметрах, 
-	//выполнять требуемый алгоритм вычисления площади для переданной в параметрах фигуры) и возвращать 
-	//объект вида: { area, figure, input }, где area - вычисленная площадь, figure - название фигуры, 
-	//для которой вычислялась площадь, input - входные параметры, по которым было произведено вычисление.
+		//2.	
+		//Написать функцию calculateArea, которая будет принимать параметры, для вычисления площади 
+		//(можете выбрать какую то конкретную фигуру, а можете, основываясь на переданных параметрах, 
+		//выполнять требуемый алгоритм вычисления площади для переданной в параметрах фигуры) и возвращать 
+		//объект вида: { area, figure, input }, где area - вычисленная площадь, figure - название фигуры, 
+		//для которой вычислялась площадь, input - входные параметры, по которым было произведено вычисление.
   
-	function calculateArea (f, w, h) {
-		let area;
-		let [ , ...input] = arguments;
+		function calculateArea (f, w, h) {
+			let area;
+			let [ , ...input] = arguments;
 
-		switch (f) {
-    	case 'square': 
-    	area=w*w;
-      break;
+			switch (f) {
+  	  	case 'square': 
+  	  	area=w*w;
+  	    break;
 
-      case 'parallelogram': 
-      area=w*h;
-      break;
+  	    case 'parallelogram': 
+  	    area=w*h;
+    	  break;
 
-			case 'rectangle': 
-      area=w*h;
-      break;
+				case 'rectangle': 
+    	  area=w*h;
+    	  break;
 
-      case 'triangle':
-      area=w*h/2;
-      break;
-   	}
+    	  case 'triangle':
+    	  area=w*h/2;
+    	  break;
+   		}
 				
-		let res={f, area, input};
-		return res
-	};
+			let res={f, area, input};
+			return res
+		};
  	
-	console.log(calculateArea('triangle', 5, 3));
-	console.log(calculateArea('square', 5));
+		console.log(calculateArea('triangle', 5, 3));
+		console.log(calculateArea('square', 5));
 
-//4.	
-//Необходимо написать иерархию классов вида:
-//Human -> Employee -> Developer
-//Human -> Employee -> Manager
-//Каждый Менеджер (Manager) должен иметь внутренний массив своих сотрудников (разработчиков), 
-//а также методы по удалению/добавлению разработчиков.
-//Каждый Разработчик (Developer) должны иметь ссылку на Менеджера и методы для изменения менеджера
-// (имеется ввиду возможность назначить другого менеджера).
-//У класса Human должны быть следующие параметры: name (строка), age (число), dateOfBirth (строка или дата)
-//У класса Employee должны присутствовать параметры: salary (число), department (строка)
-//В классе Human должен присутствовать метод displayInfo, который возвращает строку со всеми 
-//параметрами экземпляра Human.
-//В классе Employee должен быть реализовать такой же метод (displayInfo), который вызывает базовый метод 
-//и дополняет его параметрами из экземпляра Employee
-//Чтобы вызвать метод базового класса, необходимо внутри вызова метода displayInfo класса Employee написать: 
-//super.displayInfo(), это вызовет метод disaplyInfo класс Human и вернет строку с параметрами Human'a.
-
-
-//return this.name+' ' + this.age + ' ' + this.dateOfBirth;
-//this.salary = salary;
-		//this.department = department;
-class Human {
-	constructor(name, age, dateOfBirth) {
-    this.name =(typeof name=='string')? name: 'ошибка ввода данных';
-		this.age = (typeof age=='number')?age: 'ошибка ввода данных';
-			this.dateOfBirth = (typeof age=='string'||'object')? dateOfBirth: 'ошибка ввода данных'; //не получилась проверка на тип данных (дата)
-  }
-	displayInfo(){
-		return this.name+' ' + this.age + ' ' + this.dateOfBirth;
-	}
-}
-
-class Employee extends Human{
-	constructor(name, age, dateOfBirth, salary, department) {
-    super(name, age, dateOfBirth);
-    this.salary = (typeof salary=='number') ? salary: 'ошибка ввода данных';
-		this.department = (typeof salary=='string') ? department:'ошибка ввода данных';
-  }
-	displayInfo() {
-    return super.displayInfo() + ' ' + this.salary + ' ' + this.department;
-  }
-};
-
-class Manager extends Employee {
-	constructor(name, age, dateOfBirth, salary, department) {
-    super(name, age, dateOfBirth, salary, department);
-    this.list = [];
-  }
-
-	Add_developer(developer){
-		this.list.push(developer);
-		developer.manager=this.name;
-		console.log(this.list);
-		console.log(developer.manager);
-	};
-
-	Del_developer(developer){
-		this.list.splice(this.list.indexOf(developer),1);
-		developer.manager='';
-		console.log(this.list);
-	
-	};
-}	
-
-class Developer extends Employee {
-	constructor(name, age, dateOfBirth, salary, department) {
-    super(name, age, dateOfBirth, salary, department);
-    this.manager = '';
-  }
-
-	Change_manager(manager){
-		this.manager=manager.name;
-		console.log(this.manager);
-	};
-
-}	
+		//4.	
+		//Необходимо написать иерархию классов вида:
+		//Human -> Employee -> Developer
+		//Human -> Employee -> Manager
+		//Каждый Менеджер (Manager) должен иметь внутренний массив своих сотрудников (разработчиков), 
+		//а также методы по удалению/добавлению разработчиков.
+		//Каждый Разработчик (Developer) должны иметь ссылку на Менеджера и методы для изменения менеджера
+		// (имеется ввиду возможность назначить другого менеджера).
+		//У класса Human должны быть следующие параметры: name (строка), age (число), dateOfBirth (строка или дата)
+		//У класса Employee должны присутствовать параметры: salary (число), department (строка)
+		//В классе Human должен присутствовать метод displayInfo, который возвращает строку со всеми 
+		//параметрами экземпляра Human.
+		//В классе Employee должен быть реализовать такой же метод (displayInfo), который вызывает базовый метод 
+		//и дополняет его параметрами из экземпляра Employee
+		//Чтобы вызвать метод базового класса, необходимо внутри вызова метода displayInfo класса Employee написать: 
+		//super.displayInfo(), это вызовет метод disaplyInfo класс Human и вернет строку с параметрами Human'a.
 
 
-let human = new Human('Elena', 36, '24.08');
-let employee = new Employee('Inga', 32, '04.04', 100, 'fff');
-console.log(employee.displayInfo());
-console.log(employee.salary);
-let manager = new Manager('a', 1, 1, 1, 1);
-let manager2 = new Manager('s', 2, 2, 2, 2);
-let developer = new Developer(10, 10, 10, 10, 10);
-let developer2 = new Developer('f', 11, 11, 11, 11);
-let developer3 = new Developer('b', 12, 12, 12, 12);
-manager.Add_developer(developer);
-manager.Add_developer(developer2);
-manager.Add_developer(developer3);
-manager.Del_developer(developer2);
-developer3.Change_manager(manager2);
-console.log(developer.name);
+		//return this.name+' ' + this.age + ' ' + this.dateOfBirth;
+		//this.salary = salary;
+				
+		class Human {
+			constructor(name, age, dateOfBirth) {
+		    this.name =(typeof name=='string')? name: 'ошибка ввода данных';
+				this.age = (typeof age=='number')?age: 'ошибка ввода данных';
+					this.dateOfBirth = (typeof age=='string'||'object')? dateOfBirth: 'ошибка ввода данных'; //не получилась проверка на тип данных (дата)
+					//this.dateOfBirth = ((typeof age=='string')||(dateOfBirth._proto_= Data)? dateOfBirth: 'ошибка ввода данных'; //думала проверить как-то так, но оно не работает
+		  }
+			displayInfo(){
+				return this.name+' ' + this.age + ' ' + this.dateOfBirth;
+			}
+		}
 
+		class Employee extends Human{
+			constructor(name, age, dateOfBirth, salary, department) {
+		    super(name, age, dateOfBirth);
+		    this.salary = (typeof salary=='number') ? salary: 'ошибка ввода данных';
+				this.department = (typeof department =='string') ? department:'ошибка ввода данных';
+		  }
+			displayInfo() {
+		    return super.displayInfo() + ' ' + this.salary + ' ' + this.department;
+		  }
+		};
 
+		class Manager extends Employee {
+			constructor(name, age, dateOfBirth, salary, department) {
+		    super(name, age, dateOfBirth, salary, department);
+		    this.list = [];                                            // Список разработичков
+		  }
+		
+			Add_developer(developer){
+				this.list.push(developer);                                // Добавляю разработчика в список и меняю разработчику значение свойства "менеджер"
+				developer.manager=this.name;
+			
+			};
+		
+			Del_developer(developer){
+				this.list.splice(this.list.indexOf(developer),1);        // Удаляю разработчика и из списка и обнуляю разработчику значение свойства "менеджер"
+				developer.manager='';
+			};
+		}	
 
+		class Developer extends Employee {
+			constructor(name, age, dateOfBirth, salary, department) {
+		    super(name, age, dateOfBirth, salary, department);
+		    this.manager = '';
+		  }
+		
+			Change_manager(manager){ 	
+				this.manager=manager.name;						//если правильно поняла, что надо сделать.
+			};
+		
+		}	
+			
+			// Создание экземляров и проверка работы методов
+		let human = new Human('Elena', 36, '24.08');
+		let employee = new Employee('Inga', 32, '04.04', 100, 'department_1');
+		console.log(employee.displayInfo());
+			// Менеджеры
+		let manager1 = new Manager('a', 1, 1, 1, 'department_1');
+		console.log(manager1.displayInfo());
+		let manager2 = new Manager('s', 2, 2, 2, 'department_1');
+		console.log(manager2.displayInfo());
+			// Разработчики
+		let developer1 = new Developer('g', 10, 10, 10, 'department_2'); 
+		console.log(developer1.displayInfo());
+		let developer2 = new Developer('f', 11, 11, 11, 'department_2');
+		console.log(developer2.displayInfo());
+		let developer3 = new Developer('b', 12, 12, 12, 'department_2');
+		console.log(developer3.displayInfo());
+
+			// Добавление и удаление разрабочикв в список менеджера
+		manager1.Add_developer(developer1);
+		manager1.Add_developer(developer2);
+		manager1.Add_developer(developer3);
+		manager1.Del_developer(developer2);
+		console.log(manager1.list);
+		console.log(developer1.manager);
+		console.log(developer2.manager);
+
+			// Назначение другого менеджера разработчику
+		developer2.Change_manager(manager2);
+		console.log(developer2.manager);
+		
   </script> 
 
 </body>
